@@ -2,14 +2,58 @@
   <br>
   <br>
   <div class="row">
-    <div class="col-12 mt-4">
-      <div class="card" style="height: 25rem;">
+    <div class="col-md-8">
         <img class="card-img-top" height="500" src="{{bulletin.img}}" alt="Card image cap">
-        <div class="card-body">
           <h4 class="card-title">{{bulletin.title}}</h4>
           <p class="card-text">{{bulletin.text}}</p>
+    </div>
+    <div class="col-md-4">
+          <h4 class="card-title">Comments</h4>
+          <button type="button" class="btn btn-primary pull-right" (click)="addNew()">Add New</button>
+      <br>
+      <br>
+      <div *ngFor="let item of bulletin.comments;">
+        <div class="card">
+          <div class="card-body">
+            <p class="card-text">{{bulletin.text}}</p>
+          </div>
+          <div class="card-footer">
+              <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
         </div>
+        <br>
       </div>
     </div>
   </div>
 </div>
+
+<div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+ <div class="modal-dialog" role="document">
+    <div class="modal-content">
+       <div class="modal-header">
+          <h4 class="modal-title">Add new comment</h4>
+          <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+       </div>
+       <div class="modal-body">
+        <div class="form-group">
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Comment Text</span>
+                </div>
+                <textarea [(ngModel)]="articleText" class="form-control" rows="12" cols="30" aria-label="With textarea"></textarea>
+              </div>
+        </div>
+  
+       </div>
+       <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+        <button type="button" class="btn btn-default btn-primary" (click)="uploadFileToActivity()">Save</button>
+       </div>
+    </div>
+    <!-- /.modal-content -->
+ </div>
+ <!-- /.modal-dialog -->
+</div>
+<!-- /.modal !-->

@@ -11,7 +11,7 @@ import Swal from 'sweetalert2'
 export class DetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private detailsService:DetailsService) { }
-
+  display: string ='none';
   bulletin: any = [];
 
   ngOnInit() {
@@ -29,5 +29,16 @@ export class DetailsComponent implements OnInit {
       // this.router.navigate(['business']);
     });
   }
+
+  addNew(){
+    this.display='block';
+  }
+  openModal(){
+    this.display='block'; 
+  }
+  onCloseHandled(){
+    this.display='none'; 
+  }
+
 
 }
