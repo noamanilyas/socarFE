@@ -9,12 +9,12 @@ export class HomeService {
 
   constructor(private http:HttpClient) { }
 
-  getAllBooks():any{
-  	return this.http.get('http://localhost:3000/home/getAllBooks');
+  getAllBulletin():any{
+  	return this.http.get('http://localhost:3000/home/getAllBulletin');
   }
 
-  postFile(fileToUpload: File, fileTitle: string, userId: number) {
-        const endpoint = 'http://localhost:3000/admin/addNewBook?title='+fileTitle+'&id='+userId;
+  postFile(fileToUpload: File, fileTitle: string, title, content):any {
+        const endpoint = 'http://localhost:3000/admin/addBulletin';
 
         // const httpOptions = {
         //     headers: new HttpHeaders({
@@ -24,6 +24,8 @@ export class HomeService {
 
         const formData: FormData = new FormData();
         formData.append('fileKey', fileToUpload, fileToUpload.name);
+        formData.append('title', title);
+        formData.append('content', content);
         return this.http.post(endpoint, formData);
     }
   uploadArticle(title: string, text: string, userId: number) {

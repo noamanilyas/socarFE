@@ -1,24 +1,33 @@
 <div class="container">
   <br>
   <br>
+  <h2>Details</h2>
+  <br>
+  <br>
+  <a href="/" class="previous">&laquo; Back</a>
+  <br>
+  <br>
   <div class="row">
     <div class="col-md-8">
-        <img class="card-img-top" height="500" src="{{bulletin.img}}" alt="Card image cap">
+        <img class="card-img-top" height="500" [src]="baseURL+bulletin.img" alt="Card image cap">
           <h4 class="card-title">{{bulletin.title}}</h4>
-          <p class="card-text">{{bulletin.text}}</p>
+          <p >{{bulletin.content}}</p>
     </div>
     <div class="col-md-4">
           <h4 class="card-title">Comments</h4>
-          <button type="button" class="btn btn-primary pull-right" (click)="addNew()">Add New</button>
+          <button type="button" class="btn btn-primary pull-right" (click)="addNew()">Add new comment</button>
       <br>
       <br>
-      <div *ngFor="let item of bulletin.comments;">
+      <div *ngIf="commentsArray.length == 0" class="alert alert-warning" role="alert">
+        No comments posted yet. Click on Add New to post a comment.
+      </div>
+      <div *ngFor="let item of commentsArray;">
         <div class="card">
           <div class="card-body">
-            <p class="card-text">{{bulletin.text}}</p>
+            <p class="card-text">{{item.text}}</p>
           </div>
           <div class="card-footer">
-              <small class="text-muted">Last updated 3 mins ago</small>
+              <small class="text-muted">Commented on {{item.createdAt | date : "medium"}}</small>
           </div>
         </div>
         <br>
@@ -42,14 +51,14 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text">Comment Text</span>
                 </div>
-                <textarea [(ngModel)]="articleText" class="form-control" rows="12" cols="30" aria-label="With textarea"></textarea>
+                <textarea [(ngModel)]="commentText" class="form-control" rows="12" cols="30" aria-label="With textarea"></textarea>
               </div>
         </div>
   
        </div>
        <div class="modal-footer">
         <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
-        <button type="button" class="btn btn-default btn-primary" (click)="uploadFileToActivity()">Save</button>
+        <button type="button" class="btn btn-default btn-primary" (click)="postComment()">Save</button>
        </div>
     </div>
     <!-- /.modal-content -->
